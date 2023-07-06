@@ -1,0 +1,36 @@
+1. Is the Python Standard Library included with PyInputPlus?
+2. Why is PyInputPlus commonly imported with import pyinputplus as pypi?
+3. How do you distinguish between inputInt() and inputFloat()?
+4. Using PyInputPlus, how do you ensure that the user enters a whole number between 0 and 99?
+5. What is transferred to the keyword arguments allowRegexes and blockRegexes?
+6. If a blank input is entered three times, what does inputStr(limit=3) do?
+7. If blank input is entered three times, what does inputStr(limit=3, default=&#39;hello&#39;) do?
+
+answer
+1. No, the Python Standard Library is not included with PyInputPlus. The Python Standard Library is a collection of modules that come pre-installed with Python and provide a wide range of functionalities. PyInputPlus is a separate third-party library that is not part of the Python Standard Library. To use PyInputPlus, you need to install it separately using `pip` before you can import and use it in your Python code.
+
+2. PyInputPlus is commonly imported with the alias `pypi` using the statement `import pyinputplus as pypi` for brevity and convenience. The `as` keyword allows you to create an alias for the imported module, making it easier to reference and use the functions and classes provided by PyInputPlus without having to type the full module name each time.
+
+3. `inputInt()` is used to take user input and ensures that the input is a valid integer. If the user enters a value that cannot be converted to an integer, it will raise a `ValidationException` and prompt the user to enter a valid integer. On the other hand, `inputFloat()` is used to take user input and ensures that the input is a valid floating-point number. If the user enters a value that cannot be converted to a float, it will raise a `ValidationException` and prompt the user to enter a valid float.
+
+4. Using PyInputPlus, you can ensure that the user enters a whole number between 0 and 99 by using the `inputInt()` function with the `min` and `max` keyword arguments. Here's an example:
+
+```python
+import pyinputplus as pypi
+
+number = pypi.inputInt(prompt="Enter a number between 0 and 99: ", min=0, max=99)
+print("Entered number:", number)
+```
+
+In the example above, the `inputInt()` function prompts the user to enter a number between 0 and 99. The `min` and `max` arguments specify the range of valid input. If the user enters a number outside the specified range, it will raise a `ValidationException` and prompt the user to enter a valid number within the given range.
+
+5. The keyword arguments `allowRegexes` and `blockRegexes` in PyInputPlus allow you to specify regular expressions as patterns to either allow or block certain input values. 
+
+- `allowRegexes` is a list of regular expressions. If any input matches any of the regular expressions in the `allowRegexes` list, it is considered valid and allowed.
+- `blockRegexes` is also a list of regular expressions. If any input matches any of the regular expressions in the `blockRegexes` list, it is considered invalid and blocked.
+
+By using these keyword arguments, you can control and restrict the input values based on specific patterns defined by regular expressions.
+
+6. If a blank input is entered three times and you use `inputStr(limit=3)`, it will raise a `RetryLimitException`. This exception is raised when the maximum number of retries specified by the `limit` parameter is reached. In this case, since the limit is set to 3, after three blank inputs, it will raise the `RetryLimitException` and stop prompting the user for input.
+
+7. If blank input is entered three times and you use `inputStr(limit=3, default='hello')`, it will return the default value `'hello'` after three blank inputs. The `default` parameter specifies the value to return when the maximum number of retries is reached. In this case, since the limit is set to 3 and the default value is `'hello'`, after three blank inputs, it will return the default value without raising an exception.
